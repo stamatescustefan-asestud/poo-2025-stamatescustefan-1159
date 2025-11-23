@@ -1,34 +1,71 @@
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
 class Colet {
-public:
+private:
 	int greutate;
-	string destinatar;
-	string adresaDestinatar;
+	char* destinatar;
+	char* adresaDestinatar;
 	const int awb;
 	static int numarTotalColete;
 	char* descriereContinut;
+
+public:
+	//constructor fara parametrii
+	Colet() : awb(++numarTotalColete) {
+		this->greutate = 0;
+		this->destinatar = new char[strlen("Necunoscut") + 1];
+		strcpy_s(this->destinatar, strlen("Necunoscut") + 1, "Necunoscut");
+		this->adresaDestinatar = new char[strlen("Necunoscuta") + 1];
+		strcpy_s(this->adresaDestinatar, strlen("Necunoscut") + 1, "Necunoscuta");
+		this->descriereContinut = new char[strlen("N/A") + 1];
+		strcpy_s(this->descriereContinut, strlen("Necunoscut") + 1, "N/A");
+	}
+	//constructor cu 2 parametrii
+	Colet(int greutate, const char* destinatar) : awb(++numarTotalColete) {
+		this->greutate = greutate;
+		this->destinatar = new char[strlen(destinatar) + 1];
+		strcpy_s(this->destinatar, strlen(destinatar) + 1, destinatar);
+		this->adresaDestinatar = new char[strlen("Nespecificata") + 1];
+		strcpy_s(this->adresaDestinatar, strlen("Nespecificata") + 1, "Nespecificata");
+		this->descriereContinut = new char[strlen("N/A") + 1];
+		strcpy_s(this->descriereContinut, strlen("N/A") + 1, "N/A");
+	}
+	//constructor cu toti
+	Colet(int greutate, const char* destinatar, const char* adresaNoua, const char* descriere) : awb(++numarTotalColete) {
+		this->greutate = greutate;
+		this->destinatar = new char[strlen(destinatar) + 1];
+		strcpy_s(this->destinatar, strlen(destinatar) + 1, destinatar);
+		this->adresaDestinatar = new char[strlen(adresaNoua) + 1];
+		strcpy_s(this->adresaDestinatar, strlen(adresaNoua) + 1, adresaNoua);
+		this->descriereContinut = new char[strlen(descriere) + 1];
+		strcpy_s(this->descriereContinut, strlen(descriere) + 1, descriere);
+	}
 };
 
 class Depozit {
-public:
-	string oras;
+private:
+	char* oras;
 	int capacitateMaximaColete;
 	int numarZoneSortate;
 	const int idDepozit;
-	static string numeCurier;
+	static char* numeCurier;
 	int* angajatiZona;
 };
 
 class Comanda {
-public:
-	string dataPlasare;
-	string status;
+private:
+	char* dataPlasare;
+	char* status;
 	int valoareRamburs;
 	const int idComanda;
 	static int taxaTransport;
 	int* istoricDepozite;
 	int numarDepoziteIstoric;
 };
+
+int main() {
+	return 0;
+}
