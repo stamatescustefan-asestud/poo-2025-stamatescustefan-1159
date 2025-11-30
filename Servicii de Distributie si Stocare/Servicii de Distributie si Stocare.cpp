@@ -53,6 +53,39 @@ private:
 	const int idDepozit;
 	static char* numeCurier;
 	int* angajatiZona;
+
+public:
+	//constructor fara parametrii
+	Depozit() : idDepozit(rand() % 10000) {
+		this->oras = new char[strlen("Necunoscut") + 1];
+		strcpy_s(oras, strlen("Necunoscut") + 1, "Necunoscut");
+		this->capacitateMaximaColete = 0;
+		this->numarZoneSortate = 0;
+		this->angajatiZona = new int[1];
+		this->angajatiZona[0] = 0;
+	}
+
+	//constructor cu 2 parametrii
+	Depozit(const char* oras, int capacitate) : idDepozit(rand() % 10000) {
+		this->oras = new char[strlen(oras) + 1];
+		strcpy_s(this->oras, strlen(oras) + 1, oras);
+		this->capacitateMaximaColete = capacitate;
+		this->numarZoneSortate = 1;
+		this->angajatiZona = new int[1];
+		this->angajatiZona[0] = 0;
+	}
+
+	//constructor cu toti parametrii
+	Depozit(const char* oras, int capacitate, int zone, const int* angajati) : idDepozit(rand() % 10000)
+	{
+		this->oras = new char[strlen(oras) + 1];
+		strcpy_s(this->oras, strlen(oras) + 1, oras);
+		this->capacitateMaximaColete = capacitate;
+		this->numarZoneSortate = zone;
+		this->angajatiZona = new int[zone];
+		for (int i = 0; i < zone; i++)
+			this->angajatiZona[i] = angajati[i];
+	}
 };
 
 class Comanda {
