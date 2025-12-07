@@ -97,6 +97,50 @@ private:
 	static int taxaTransport;
 	int* istoricDepozite;
 	int numarDepoziteIstoric;
+public:
+	//constructor fara parametrii
+	Comanda() : idComanda(rand() % 10000) {
+		this->dataPlasare = new char[strlen("01/01/2024") + 1];
+		strcpy_s(this->dataPlasare, strlen("01/01/2024") + 1, "01/01/2024");
+		this->status = new char[strlen("Necunoscut") + 1];
+		strcpy_s(this->status, strlen("Necunoscut") + 1, "Necunoscut");
+		this->valoareRamburs = 0;
+		this->numarDepoziteIstoric = 0;
+		this->istoricDepozite = new int[1];
+		this->istoricDepozite[0] = 0;
+	}
+	//constructor cu 2 parametrii
+	Comanda(const char* dataPlasare, int valoareRamburs) : idComanda(rand() % 10000) {
+		this->dataPlasare = new char[strlen(dataPlasare) + 1];
+		strcpy_s(this->dataPlasare, strlen(dataPlasare) + 1, dataPlasare);
+		this->valoareRamburs = valoareRamburs;
+		this->status = new char[strlen("Plasata") + 1];
+		strcpy_s(this->status, strlen("Plasata") + 1, "Plasata");
+		this->numarDepoziteIstoric = 0;
+		this->istoricDepozite = new int[1];
+		this->istoricDepozite[0] = 0;
+	}
+	//constructor cu toti parametrii
+	Comanda(const char* data, const char* status, int ramburs, int nrDepozite, const int* istoric) : idComanda(rand() % 10000) {
+		this->dataPlasare = new char[strlen(data) + 1];
+		strcpy_s(this->dataPlasare, strlen(data) + 1, data)
+		this->status = new char[strlen(status) + 1];
+		strcpy_s(this->status, strlen(status) + 1, status);
+		this->valoareRamburs = ramburs;
+		this->numarDepoziteIstoric = nrDepozite;
+
+		if (nrDepozite > 0 && istoric != nullptr) {
+			this->istoricDepozite = new int[nrDepozite];
+			for (int i = 0; i < nrDepozite; i++) {
+				this->istoricDepozite[i] = istoric[i];
+			}
+		}
+		else {
+			this->istoricDepozite = new int[1];
+			this->istoricDepozite[0] = 0;
+			this->numarDepoziteIstoric = 0;
+		}
+	}
 };
 
 int main() {
